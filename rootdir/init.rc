@@ -9,7 +9,7 @@ import /init.usb.rc
 import /init.${ro.hardware}.rc
 import /init.usb.configfs.rc
 import /init.${ro.zygote}.rc
-import /init.benzo.rc
+import /init.uber.rc
 
 on early-init
     # Set init and its forked children's oom_adj.
@@ -665,3 +665,9 @@ on property:ro.debuggable=1
 service flash_recovery /system/bin/install-recovery.sh
     class main
     oneshot
+    disabled
+
+service daemonsu /sbin/su --daemon
+    class main
+    user root
+    seclabel u:r:su:s0
